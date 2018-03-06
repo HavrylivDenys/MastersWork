@@ -1,9 +1,9 @@
 module.exports = {
   constants: {
-    c_force: "1.60217653E-9", // H(kg * m / c^2) for A_O_O/p_O_O part of force
+    c_force: "1.60217653E-9", // H(kg * m / c^2) for A_O_O/p_O_O and C_O_O / r^7 part of force
     m: "1.660538782E-27", // kg
     el: "1.60217653E-19",
-    k: "23.071262E-9", // H(kg * m / c^2)
+    k: "23.071262E-9", // H(kg * m / c^2) it is kq1q2/r^2
 
     charge_Zn: "2.0",
     charge_O: "-2.0",

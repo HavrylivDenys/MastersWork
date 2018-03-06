@@ -88,7 +88,7 @@ function countForce(Oxygen, Zunk) {
 }
 
 function force_O_O(r) {
-  force = k * (charge_f * charge_f) / (r * r) + c * (A_O_O / p_O_O) * Math.exp(-Math.abs(r) / p_O_O) + c * 6 * C_O_O / Math.pow(Math.abs(r), 7.0);
+  force = k * (charge_f * charge_f) / (r * r) + c * (A_O_O / p_O_O) * Math.exp(-Math.abs(r) / p_O_O) - c * 6 * C_O_O / Math.pow(Math.abs(r), 7.0);
   return force;
 }
 
