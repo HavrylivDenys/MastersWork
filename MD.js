@@ -1,5 +1,5 @@
 // Molecular dynamics version 1.0.0
-
+const fs = require('fs');
 const starting_data = require('./starting_data.json');
 
 const constants = require('./constants').constants;
@@ -118,7 +118,6 @@ function countCoordinates(Oxygen, Zunk) {
 			Zunk[i].z = Zunk[i].z + Zunk[i].speedY * t;				
 	}
 }
-
 function force_O_O(r) {
   force = k * (charge_f * charge_f) / (r * r) + c * (A_O_O / p_O_O) * Math.exp(-Math.abs(r) / p_O_O) - c * 6 * C_O_O / Math.pow(Math.abs(r), 7.0);
   return force;
@@ -127,33 +126,63 @@ function force_Zn_O(r) {
   force = k * (charge_s * charge_f) / (r * r) + c * (A_Zn_O / p_Zn_O) * Math.exp(-Math.abs(r) / p_Zn_O);
   return force;
 }
-const startO = JSON.parse(JSON.stringify(Oxygen));
 
-const interval = setInterval(() =>{	
-	countForce(Oxygen, Zunk);
-	countAcceleration(Oxygen, Zunk);
-	countSpeed(Oxygen, Zunk);
-	countCoordinates(Oxygen, Zunk);
-	end = new Date(milliseconds);
-	console.log(end - start);	
-}, 4);
+// const interval = setInterval(() =>{	
+// 	countForce(Oxygen, Zunk);
+// 	countAcceleration(Oxygen, Zunk);
+// 	countSpeed(Oxygen, Zunk);
+// 	countCoordinates(Oxygen, Zunk);	
+// }, 10); // real time of execution on my machine is 6-7 ms.
 
-setTimeout(() =>{
-	clearInterval(interval);
-	print();
-}, 200000);
+// setTimeout(() =>{
+// 	clearInterval(interval);
+// 	// print();
+// }, 200000);
+function workFlow(){
+	for(let i = 0; i <= 1e7; i++){
+		countForce(Oxygen, Zunk);
+		countAcceleration(Oxygen, Zunk);
+		countSpeed(Oxygen, Zunk);
+		countCoordinates(Oxygen, Zunk);
+		if(!(i % 10000)){
+			try{				
+				for(let j = 0; j < N; j++){			
+					fs.appendFileSync('results.txt', `Oxygen x: ${Oxygen[j].x.toFixed(9)} y: ${Oxygen[j].y.toFixed(9)} z: ${Oxygen[j].z.toFixed(9)}\nZunk x: ${Zunk[j].x.toFixed(9)} y: ${Zunk[j].y.toFixed(9)} z: ${Zunk[j].z.toFixed(9)} cycle: ${i}\n`,);
+				}
+			}catch(err){
+				console.log(err);			
+			}finally{
+				fs.appendFileSync('results.txt', '\n');		
+			}			
+		}
+	}	
+}
 
-// let start,end;
-// start = new Date();
-// countForce(Oxygen, Zunk);
-// countAcceleration(Oxygen, Zunk);
-// countSpeed(Oxygen, Zunk);
-// countCoordinates(Oxygen, Zunk);
-// end = new Date();
-// console.log(end - start);	
+function countTime(){
+	let start,end;	
+	let O, Z;
+	let time = 0;
+	// lets make a copy of objects to make counting clear function	
+	O = JSON.parse(JSON.stringify(Oxygen));
+	Z = JSON.parse(JSON.stringify(Zunk));
+	for(let i = 0; i < 100; i++){
+		start = new Date();	
+		countForce(O, Z);
+		countAcceleration(O, Z);
+		countSpeed(O, Z);
+		countCoordinates(O, Z);
+		end = new Date();
+		if(time < (end - start)){
+			time = end - start;
+		}
+	}	
+	return time;
+} // counting time for cicle
 
 function print(){
 	for(let i = 0; i < N; i++){
 		console.log(startO[i].x - Oxygen[i].x);	
 	}
-}
+} // test function
+
+workFlow();
