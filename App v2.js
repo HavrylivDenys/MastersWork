@@ -2,7 +2,7 @@
 const fs = require('fs');
 const starting_data = require('./starting_data.json');
 
-const constants = require('./constants').constants;
+const constants = require('./const_v_2').constants;
 
 const A_O_O = parseFloat(constants.A_O_O);
 const p_O_O = parseFloat(constants.p_O_O);
@@ -19,7 +19,7 @@ const charge_s = 2.0;
 const O_coordinates = starting_data.Oxygen;
 const Zn_coordinates = starting_data.Zunk;
 const N = starting_data.Number;
-const t = 1e-15;
+const t = 1;
 
 class Molecule{
 	constructor(x = 0, y = 0, z = 0){
@@ -29,7 +29,7 @@ class Molecule{
 		this.forceX = 0;
 		this.forceY = 0;
 		this.forceZ = 0;
-		this.accelerationX = 0.0;
+		this.accelerationX = 0;
 		this.accelerationY = 0;
 		this.accelerationZ = 0;
 		this.speedX = 0;
@@ -126,33 +126,21 @@ function force_Zn_O(r) {
   force = k * (charge_s * charge_f) / (r * r) + c * (A_Zn_O / p_Zn_O) * Math.exp(-Math.abs(r) / p_Zn_O);
   return force;
 }
-
-// const interval = setInterval(() =>{	
-// 	countForce(Oxygen, Zunk);
-// 	countAcceleration(Oxygen, Zunk);
-// 	countSpeed(Oxygen, Zunk);
-// 	countCoordinates(Oxygen, Zunk);	
-// }, 10); // real time of execution on my machine is 6-7 ms.
-
-// setTimeout(() =>{
-// 	clearInterval(interval);
-// 	// print();
-// }, 200000);
 function workFlow(){
-	for(let i = 0; i <= 1e6; i++){
+	for(let i = 0; i <= 1e5; i++){
 		countForce(Oxygen, Zunk);
 		countAcceleration(Oxygen, Zunk);
 		countSpeed(Oxygen, Zunk);
 		countCoordinates(Oxygen, Zunk);
-		if(!(i % 10000)){
+		if(!(i % 100000)){
 			try{				
 				for(let j = 0; j < N; j++){			
-					fs.appendFileSync('results.txt', `Oxygen x: ${Oxygen[j].x.toFixed(9)} y: ${Oxygen[j].y.toFixed(9)} z: ${Oxygen[j].z.toFixed(9)}\nZunk x: ${Zunk[j].x.toFixed(9)} y: ${Zunk[j].y.toFixed(9)} z: ${Zunk[j].z.toFixed(9)} cycle: ${i}\n`,);
+					fs.appendFileSync('results2.txt', `Oxygen x: ${Oxygen[j].x.toFixed(9)} y: ${Oxygen[j].y.toFixed(9)} z: ${Oxygen[j].z.toFixed(9)}\nZunk x: ${Zunk[j].x.toFixed(9)} y: ${Zunk[j].y.toFixed(9)} z: ${Zunk[j].z.toFixed(9)} cycle: ${i}\n`,);
 				}
 			}catch(err){
 				console.log(err);			
 			}finally{
-				fs.appendFileSync('results.txt', '\n');		
+				fs.appendFileSync('results2.txt', '\n');		
 			}			
 		}
 	}	
@@ -179,10 +167,12 @@ function countTime(){
 	return time;
 } // counting time for cicle
 
+const startO = JSON.parse(JSON.stringify(Oxygen));
 function print(){
 	for(let i = 0; i < N; i++){
-		console.log(startO[i].x - Oxygen[i].x);	
+		console.log(startO[i].x - Oxygen[i].x);		
 	}
 } // test function
 
 workFlow();
+print();
