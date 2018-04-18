@@ -56,7 +56,18 @@ for(let i = 0; i < Zunk.length; i++){
 }
 
 function countForce(Oxygen, Zunk) {
-		let dx = dy = dz = dr = 0;
+    let dx = 0;
+    let dy = 0;
+    let dz = 0;
+    let dr = 0;
+    for (let i = 0; i < N; i++) {
+      Oxygen[i].forceX = 0;
+      Oxygen[i].forceY = 0;
+      Oxygen[i].forceZ = 0;
+      Zunk[i].forceX = 0;
+      Zunk[i].forceX = 0;
+      Zunk[i].forceX = 0;
+    }
 		// Counting force between O-O molecules
     for (let i = 0; i < N; i++) {
         for (let j = i + 1; j < N; j++) {
@@ -131,18 +142,7 @@ function workFlow(){
 		countForce(Oxygen, Zunk);
 		countAcceleration(Oxygen, Zunk);
 		countSpeed(Oxygen, Zunk);
-		countCoordinates(Oxygen, Zunk);
-		if(!(i % 10000)){
-			try{				
-				for(let j = 0; j < N; j++){			
-					fs.appendFileSync('results.txt', `Oxygen x: ${Oxygen[j].x.toFixed(9)} y: ${Oxygen[j].y.toFixed(9)} z: ${Oxygen[j].z.toFixed(9)}\nZunk x: ${Zunk[j].x.toFixed(9)} y: ${Zunk[j].y.toFixed(9)} z: ${Zunk[j].z.toFixed(9)} cycle: ${i}\n`,);
-				}
-			}catch(err){
-				console.log(err);			
-			}finally{
-				fs.appendFileSync('results.txt', '\n');		
-			}			
-		}
+		countCoordinates(Oxygen, Zunk);		
 	}	
 }
 
@@ -174,3 +174,4 @@ function print(){
 } // test function
 
 workFlow();
+print();
