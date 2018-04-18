@@ -56,8 +56,19 @@ for(let i = 0; i < Zunk.length; i++){
 }
 
 function countForce(Oxygen, Zunk) {
-		let dx = dy = dz = dr = 0;
-		// Counting force between O-O molecules
+    let dx = 0;
+    let dy = 0;
+    let dz = 0;
+    let dr = 0;
+    for (let i = 0; i < N; i++) {
+      Oxygen[i].forceX = 0;
+      Oxygen[i].forceY = 0;
+      Oxygen[i].forceZ = 0;
+      Zunk[i].forceX = 0;
+      Zunk[i].forceX = 0;
+      Zunk[i].forceX = 0;
+    }
+	// Counting force between O-O molecules
     for (let i = 0; i < N; i++) {
         for (let j = i + 1; j < N; j++) {
         	dx = Oxygen[i].x - Oxygen[j].x;
