@@ -4,15 +4,45 @@ const starting_data = require('./starting_data.json');
 
 const constants = require('./constants').constants;
 
-const A_O_O = parseFloat(constants.A_O_O);
-const p_O_O = parseFloat(constants.p_O_O);
-const A_Zn_O = parseFloat(constants.A_Zn_O);
-const p_Zn_O = parseFloat(constants.p_Zn_O);
-const C_O_O = parseFloat(constants.C_O_O)
-const k = parseFloat(constants.k);
-const c = parseFloat(constants.c_force);
-const m_Zn = parseFloat(constants.m_Zn);
-const m_O = parseFloat(constants.m_O);
+let A_O_O;
+let p_O_O;
+let A_Zn_O;
+let p_Zn_O;
+let C_O_O;
+let k = parseFloat(constants.k);
+let c = parseFloat(constants.c_force);
+let m_Zn = parseFloat(constants.m_Zn);
+let m_O = parseFloat(constants.m_O);			
+
+function setConstants(param){
+	switch(param){
+		case 0: 
+			A_O_O = parseFloat(constants.A_O_O);
+			p_O_O = parseFloat(constants.p_O_O);
+			A_Zn_O = parseFloat(constants.A_Zn_O);
+			p_Zn_O = parseFloat(constants.p_Zn_O);
+			C_O_O = parseFloat(constants.C_O_O);
+			break;
+		case 1: 
+			A_O_O = parseFloat(constants.A_O_O_Nyberg);
+			p_O_O = parseFloat(constants.p_O_O_Nyberg);
+			A_Zn_O = parseFloat(constants.A_Zn_O_Nyberg);
+			p_Zn_O = parseFloat(constants.p_Zn_O_Nyberg);
+			C_O_O = parseFloat(constants.C_O_O_Nyberg);
+			break;
+		case 2:
+			k = 1;
+			c = 1;
+			m_Zn = 60910.39E6;
+			m_O = 14903.34E6;
+			A_O_O = parseFloat(constants.A_O_O);
+			p_O_O = parseFloat(constants.p_O_O);
+			A_Zn_O = parseFloat(constants.A_Zn_O);
+			p_Zn_O = parseFloat(constants.p_Zn_O);
+			C_O_O = parseFloat(constants.C_O_O);
+			break;			
+	}	
+}
 const charge_f = -2.0;
 const charge_s = 2.0;
 
@@ -137,16 +167,18 @@ function force_Zn_O(r) {
   force = k * (charge_s * charge_f) / (r * r) + c * (A_Zn_O / p_Zn_O) * Math.exp(-Math.abs(r) / p_Zn_O);
   return force;
 }
-function workFlow(){
-	for(let i = 0; i <= 1e5; i++){
+function workFlow(param){
+	setConstants(param);
+	for(let i = 0; i <= 1e7; i++){
 		countForce(Oxygen, Zunk);
 		countAcceleration(Oxygen, Zunk);
 		countSpeed(Oxygen, Zunk);
 		countCoordinates(Oxygen, Zunk);
-		if(!(i % 10000)){
+		if((i == 1e4 || i == 1e5 || i == 1e7)){
 			try{				
-				for(let j = 0; j < N; j++){			
-					fs.appendFileSync('results.txt', `Oxygen x: ${Oxygen[j].x.toFixed(9)} y: ${Oxygen[j].y.toFixed(9)} z: ${Oxygen[j].z.toFixed(9)}\nZunk x: ${Zunk[j].x.toFixed(9)} y: ${Zunk[j].y.toFixed(9)} z: ${Zunk[j].z.toFixed(9)} cycle: ${i}\n`,);
+				for(let j = 0; j < N; j++){
+					if( i == 1e7 ) fs.appendFileSync('results.txt', `Oxygen x: ${Oxygen[j].x.toFixed(9)}; y: ${Oxygen[j].y.toFixed(9)}; z: ${Oxygen[j].z.toFixed(9)};\nZunk x: ${Zunk[j].x.toFixed(9)}; y: ${Zunk[j].y.toFixed(9)}; z: ${Zunk[j].z.toFixed(9)}; cycle: ${i}; param: ${param}.\n`);			
+					fs.appendFileSync('results.txt', `Oxygen x: ${Oxygen[j].x.toFixed(9)}; y: ${Oxygen[j].y.toFixed(9)}; z: ${Oxygen[j].z.toFixed(9)};\nZunk x: ${Zunk[j].x.toFixed(9)}; y: ${Zunk[j].y.toFixed(9)}; z: ${Zunk[j].z.toFixed(9)}; cycle: ${i};\n`);
 				}
 			}catch(err){
 				console.log(err);			
@@ -164,25 +196,25 @@ function countTime(){
 	// lets make a copy of objects to make counting clear function	
 	O = JSON.parse(JSON.stringify(Oxygen));
 	Z = JSON.parse(JSON.stringify(Zunk));
-	for(let i = 0; i < 100; i++){
-		start = new Date();	
+	start = new Date();
+	for(let i = 0; i < 100; i++){			
 		countForce(O, Z);
 		countAcceleration(O, Z);
 		countSpeed(O, Z);
-		countCoordinates(O, Z);
-		end = new Date();
-		if(time < (end - start)){
-			time = end - start;
-		}
-	}	
+		countCoordinates(O, Z);	
+	}
+	end = new Date();
+	time = (end - start)/100;
 	return time;
 } // counting time for cicle
 const startO = JSON.parse(JSON.stringify(Oxygen));
 function print(){
 	for(let i = 0; i < N; i++){
-		console.log(startO[i].x - Oxygen[i].x);	
+		console.log(startO[i].x - Oxygen[i].x, i);
 	}
 } // test function
 
-workFlow();
-print();
+for(let param = 0; param < 3; param++){
+	workFlow(param);
+	print();
+}
