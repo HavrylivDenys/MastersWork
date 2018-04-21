@@ -1,4 +1,4 @@
-// Molecular dynamics version 1.0.1
+// Molecular dynamics version 1.0.0
 const fs = require('fs');
 const path = require('path');
 const starting_data = require('./starting_data.json');
@@ -203,13 +203,13 @@ function force_Zn_O(r) {
 function workFlow(name){
 	setConstants(name);
 	for(let i = 0; i <= 1e7; i++){
-		countForce();
-		countAcceleration();
+		countForce(Oxygen, Zunk);
+		countAcceleration(Oxygen, Zunk);
 		if(i == 0){
-			countSpeed();
-			countCoordinates();
+			countSpeed(Oxygen, Zunk);
+			countCoordinates(Oxygen, Zunk);
 		}else {
-			verle();
+			verle(Oxygen,Zunk);
 		}		
 		let cycle = 0;
 		if((i == 0 || i == 1e4 || i == 1e5 || i == 1e7)){
@@ -277,3 +277,26 @@ function print(){
 		console.log(startO[i].x - Oxygen[i].x, i);
 	}
 } // test function
+
+
+function test(){
+	setConstants('Berhman');
+	let cycle = 0;
+	for(let i = 0; i <= 1e4; i++){
+		countForce(Oxygen, Zunk);
+		countAcceleration(Oxygen, Zunk);
+		if(i == 0){
+			countSpeed(Oxygen, Zunk);
+			countCoordinates(Oxygen, Zunk);
+		}else {
+			verle(Oxygen,Zunk);
+		}		
+		if((i == 0 || i == 1e4 || i == 1e5 || i == 1e7)){
+			writeToAFile('Berhman', cycle);			
+			cycle++;
+		}		
+	}	
+}
+
+test();
+print();
