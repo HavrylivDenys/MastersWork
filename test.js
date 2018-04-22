@@ -201,6 +201,7 @@ function force_Zn_O(r) {
   return force;
 }
 function workFlow(name){
+	let cycle = 0;
 	setConstants(name);
 	for(let i = 0; i <= 1e7; i++){
 		countForce(Oxygen, Zunk);
@@ -211,7 +212,6 @@ function workFlow(name){
 		}else {
 			verle(Oxygen,Zunk);
 		}		
-		let cycle = 0;
 		if((i == 0 || i == 1e4 || i == 1e5 || i == 1e7)){
 			writeToAFile(name, cycle);
 			cycle++;

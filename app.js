@@ -30,23 +30,12 @@ function setConstants(name){
 			A_Zn_O = parseFloat(constants.A_Zn_O_Nyberg);
 			p_Zn_O = parseFloat(constants.p_Zn_O_Nyberg);
 			C_O_O = parseFloat(constants.C_O_O_Nyberg);
-			break;
-		case 'test':
-			k = 1;
-			c = 1;
-			m_Zn = 60910.39E6;
-			m_O = 14903.34E6;
-			A_O_O = parseFloat(constants.A_O_O);
-			p_O_O = parseFloat(constants.p_O_O);
-			A_Zn_O = parseFloat(constants.A_Zn_O);
-			p_Zn_O = parseFloat(constants.p_Zn_O);
-			C_O_O = parseFloat(constants.C_O_O);
 			break;			
 	}	
 }
 
-const charge_f = -2.0;
-const charge_s = 2.0;
+const charge_O = -2.0;
+const charge_Zn = 2.0;
 
 const assemblyName = '(ZnO)\u2081\u2085';
 
@@ -54,6 +43,9 @@ const O_coordinates = starting_data.Oxygen;
 const Zn_coordinates = starting_data.Zunk;
 const N = starting_data.Number;
 const t = 1e-15;
+const Lx = 15;
+const Ly = 20;
+const Lz = 20;
 
 class Atom{
 	constructor(x = 0, y = 0, z = 0){
@@ -83,20 +75,20 @@ class Atom{
 	}
 }
 
-const Oxygen = new Array(N);
-for(let i = 0; i < Oxygen.length; i++){
-	Oxygen[i] = new Atom(O_coordinates.x[i],O_coordinates.y[i],O_coordinates.z[i]);
-}
-const Zunk = new Array(N);
-for(let i = 0; i < Zunk.length; i++){
-	Zunk[i] = new Atom(Zn_coordinates.x[i],Zn_coordinates.y[i],Zn_coordinates.z[i]);
-}
+// const Oxygen = new Array(N);
+// for(let i = 0; i < N; i++){
+// 	Oxygen[i] = new Atom(O_coordinates.x[i],O_coordinates.y[i],O_coordinates.z[i]);
+// }
+// const Zunk = new Array(N);
+// for(let i = 0; i < N; i++){
+// 	Zunk[i] = new Atom(Zn_coordinates.x[i],Zn_coordinates.y[i],Zn_coordinates.z[i]);
+// }
 
 function countForce(Oxygen, Zunk) {
     let dx = 0;
     let dy = 0;
     let dz = 0;
-    let dr = 0;
+    let r = 0;
     for (let i = 0; i < N; i++) {
       Oxygen[i].forceX = 0;
       Oxygen[i].forceY = 0;
@@ -111,28 +103,28 @@ function countForce(Oxygen, Zunk) {
         	dx = Oxygen[i].x - Oxygen[j].x;
         	dy = Oxygen[i].y - Oxygen[j].y;
         	dz = Oxygen[i].z - Oxygen[j].z;
-        	dr = Math.sqrt(dx * dx + dy * dy + dz * dz);
-        	Oxygen[i].forceX = Oxygen[i].forceX + (dx/dr) * force_O_O(dr);        	
-        	Oxygen[j].forceX = Oxygen[j].forceX - (dx/dr) * force_O_O(dr);
-        	Oxygen[i].forceY = Oxygen[i].forceY + (dy/dr) * force_O_O(dr);
-        	Oxygen[j].forceY = Oxygen[j].forceY - (dy/dr) * force_O_O(dr);
-        	Oxygen[i].forceZ = Oxygen[i].forceZ + (dz/dr) * force_O_O(dr);
-        	Oxygen[j].forceZ = Oxygen[j].forceZ - (dz/dr) * force_O_O(dr);
+        	r = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        	Oxygen[i].forceX = Oxygen[i].forceX + (dx/r) * force_O_O(r);        	
+        	Oxygen[j].forceX = Oxygen[j].forceX - (dx/r) * force_O_O(r);
+        	Oxygen[i].forceY = Oxygen[i].forceY + (dy/r) * force_O_O(r);
+        	Oxygen[j].forceY = Oxygen[j].forceY - (dy/r) * force_O_O(r);
+        	Oxygen[i].forceZ = Oxygen[i].forceZ + (dz/r) * force_O_O(r);
+        	Oxygen[j].forceZ = Oxygen[j].forceZ - (dz/r) * force_O_O(r);
         }
-		}
-		// Counting force between Zn-O molecules
+	}
+	// Counting force between Zn-O molecules
     for (let i = 0; i < N; i++) {
         for (let j = 0; j < N; j++) {
         	dx = Oxygen[i].x - Zunk[j].x;
         	dy = Oxygen[i].y - Zunk[j].y;
         	dz = Oxygen[i].z - Zunk[j].z;
-        	dr = Math.sqrt(dx * dx + dy * dy + dz * dz);
-        	Oxygen[i].forceX = Oxygen[i].forceX + (dx/dr) * force_Zn_O(dr);        	
-        	Zunk[j].forceX = Zunk[j].forceX - (dx/dr) * force_Zn_O(dr);
-        	Oxygen[i].forceY = Oxygen[i].forceY + (dy/dr) * force_Zn_O(dr);
-        	Zunk[j].forceY = Zunk[j].forceY - (dy/dr) * force_Zn_O(dr);
-        	Oxygen[i].forceZ = Oxygen[i].forceZ + (dz/dr) * force_Zn_O(dr);
-        	Zunk[j].forceZ = Zunk[j].forceZ - (dz/dr) * force_Zn_O(dr);
+        	r = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        	Oxygen[i].forceX = Oxygen[i].forceX + (dx/r) * force_Zn_O(r);        	
+        	Zunk[j].forceX = Zunk[j].forceX - (dx/r) * force_Zn_O(r);
+        	Oxygen[i].forceY = Oxygen[i].forceY + (dy/r) * force_Zn_O(r);
+        	Zunk[j].forceY = Zunk[j].forceY - (dy/r) * force_Zn_O(r);
+        	Oxygen[i].forceZ = Oxygen[i].forceZ + (dz/r) * force_Zn_O(r);
+        	Zunk[j].forceZ = Zunk[j].forceZ - (dz/r) * force_Zn_O(r);
         }
     }
 }
@@ -150,20 +142,20 @@ function countSpeed(Oxygen, Zunk) {
 	for (let i = 0; i < N; i++) {
 			Oxygen[i].speedX = Oxygen[i].speedX + Oxygen[i].accelerationX * t;
 			Oxygen[i].speedY = Oxygen[i].speedY + Oxygen[i].accelerationY * t;
-			Oxygen[i].speedZ = Oxygen[i].speedY + Oxygen[i].accelerationY * t;
+			Oxygen[i].speedZ = Oxygen[i].speedZ + Oxygen[i].accelerationZ * t;
 			Zunk[i].speedX = Zunk[i].speedX + Zunk[i].accelerationX * t;
 			Zunk[i].speedY = Zunk[i].speedY + Zunk[i].accelerationY * t;
-			Zunk[i].speedZ = Zunk[i].speedY + Zunk[i].accelerationY * t;				
+			Zunk[i].speedZ = Zunk[i].speedZ + Zunk[i].accelerationZ * t;				
 	}
 }
 function countCoordinates(Oxygen, Zunk) {
 	for (let i = 0; i < N; i++) {
-			Oxygen[i].x = Oxygen[i].x + Oxygen[i].speedX * t;
-			Oxygen[i].y = Oxygen[i].y + Oxygen[i].speedY * t;
-			Oxygen[i].z = Oxygen[i].z + Oxygen[i].speedY * t;
-			Zunk[i].x = Zunk[i].x + Zunk[i].speedX * t;
-			Zunk[i].y = Zunk[i].y + Zunk[i].speedY * t;
-			Zunk[i].z = Zunk[i].z + Zunk[i].speedY * t;				
+			Oxygen[i].x = Oxygen[i].x + Oxygen[i].speedX * t + 0.5 * Oxygen[i].accelerationX * t * t;
+			Oxygen[i].y = Oxygen[i].y + Oxygen[i].speedY * t + 0.5 * Oxygen[i].accelerationY * t * t;
+			Oxygen[i].z = Oxygen[i].z + Oxygen[i].speedZ * t + 0.5 * Oxygen[i].accelerationZ * t * t;
+			Zunk[i].x = Zunk[i].x + Zunk[i].speedX * t + 0.5 * Zunk[i].accelerationX * t * t;
+			Zunk[i].y = Zunk[i].y + Zunk[i].speedY * t + 0.5 * Zunk[i].accelerationY * t * t;
+			Zunk[i].z = Zunk[i].z + Zunk[i].speedZ * t + 0.5 * Zunk[i].accelerationZ * t * t;			
 	}
 }
 
@@ -189,37 +181,107 @@ function verle(Oxygen, Zunk){
 		Zunk[i].x0 = d;
 		Zunk[i].y0 = f;
 		Zunk[i].z0 = e;
+	}	
+}
+
+function box(Oxygen, Zunk){
+	for(let i = 0; i < N; i++){
+		if(Oxygen[i].x > Lx){
+			while(Oxygen[i].x > Lx){
+				Oxygen[i].x = Oxygen[i].x - Lx/2;
+			}			
+		}else if(Oxygen[i].x < -Lx){
+			while(Oxygen[i].x < -Lx){
+				Oxygen[i].x = Oxygen[i].x + Lx/2;
+			}
+		}
+		if(Oxygen[i].y > Ly){
+			while(Oxygen[i].y > Ly){
+				Oxygen[i].y = Oxygen[i].y - Ly/2;
+			}			
+		}else if(Oxygen[i].y < -Ly){
+			while(Oxygen[i].y < -Ly){
+				Oxygen[i].y = Oxygen[i].y + Ly/2;
+			}			
+		}
+		if(Oxygen[i].z > Lz){
+			while(Oxygen[i].z > Lz){
+				Oxygen[i].z = Oxygen[i].z - Lz/2;
+			}			
+		}else if(Oxygen[i].z < -Lz){
+			while(Oxygen[i].z < -Lz){
+				Oxygen[i].z = Oxygen[i].z + Lz/2;
+			}			
+		}
+		if(Zunk[i].x > Lx){
+			while(Zunk[i].x > Lx){
+				Zunk[i].x = Zunk[i].x - Lx/2;
+			}			
+		}else if(Zunk[i].x < -Lx){
+			while(Zunk[i].x < -Lx){
+				Zunk[i].x = Zunk[i].x + Lx/2;
+			}			
+		}
+		if(Zunk[i].y > Ly){
+			while(Zunk[i].y > Ly){
+				Zunk[i].y = Zunk[i].y - Ly/2;
+			}			
+		}else if(Zunk[i].y < -Ly){
+			while(Zunk[i].y < -Ly){
+				Zunk[i].y = Zunk[i].y + Ly/2;
+			}			
+		}
+		if(Zunk[i].z > Lz){
+			while(Zunk[i].z > Lz){
+				Zunk[i].z = Zunk[i].z - Lz/2;
+			}			
+		}else if(Zunk[i].z < -Lz){
+			while(Zunk[i].z < -Lz){
+				Zunk[i].z = Zunk[i].z + Lz/2;
+			}			
+		}
 	}
 }
 
 function force_O_O(r) {
-  force = k * (charge_f * charge_f) / (r * r) + c * (A_O_O / p_O_O) * Math.exp(-Math.abs(r) / p_O_O) - c * 6 * C_O_O / Math.pow(Math.abs(r), 7.0);
+  force = k * (charge_O * charge_O) / (r * r) + c * (A_O_O / p_O_O) * Math.exp(-Math.abs(r) / p_O_O) - c * 6 * C_O_O / Math.pow(Math.abs(r), 7.0);
   return force;
 }
 function force_Zn_O(r) {
-  force = k * (charge_s * charge_f) / (r * r) + c * (A_Zn_O / p_Zn_O) * Math.exp(-Math.abs(r) / p_Zn_O);
+  force = k * (charge_Zn * charge_O) / (r * r) + c * (A_Zn_O / p_Zn_O) * Math.exp(-Math.abs(r) / p_Zn_O);
   return force;
 }
 function workFlow(name){
+	let cycle = 0;
+	const Oxygen = new Array(N);
+	for(let i = 0; i < N; i++){
+		Oxygen[i] = new Atom(O_coordinates.x[i], O_coordinates.y[i], O_coordinates.z[i]);
+	}
+	const Zunk = new Array(N);
+	for(let i = 0; i < N; i++){
+		Zunk[i] = new Atom(Zn_coordinates.x[i], Zn_coordinates.y[i], Zn_coordinates.z[i]);
+	}
 	setConstants(name);
 	for(let i = 0; i <= 1e7; i++){
-		countForce();
-		countAcceleration();
+		countForce(Oxygen, Zunk);
+		countAcceleration(Oxygen, Zunk);
 		if(i == 0){
-			countSpeed();
-			countCoordinates();
-		}else {
-			verle();
-		}		
-		let cycle = 0;
-		if((i == 0 || i == 1e4 || i == 1e5 || i == 1e7)){
-			writeToAFile(name, cycle);
+			countSpeed(Oxygen, Zunk);
+			countCoordinates(Oxygen, Zunk);
+			writeToAFile(name, cycle, Oxygen, Zunk);
+			cycle++;
+			continue;
+		}
+		verle(Oxygen, Zunk);
+		box(Oxygen, Zunk);				
+		if((i == 1e4 || i == 1e5 || i == 1e7)){
+			writeToAFile(name, cycle, Oxygen, Zunk);
 			cycle++;
 		}		
 	}	
 }
 
-function writeToAFile(name, cycle){
+function writeToAFile(name, cycle, Oxygen, Zunk){
 	let dir = {dir: __dirname, base: name};    
     let dirName = path.format(dir);
     let file = {dir: dirName, base: `${cycle}.xyz`};
@@ -233,10 +295,10 @@ function writeToAFile(name, cycle){
 		fs.appendFileSync(fileName, `${N}\n`);
 		fs.appendFileSync(fileName, `${assemblyName}\n`);
 		for(let j = 0; j < N; j++){
-			O = `O`.padEnd(10,' ') + `${Oxygen[j].x.toFixed(9)}`.padEnd(15, ' ') 
-			+ `${Oxygen[j].y.toFixed(9)}`.padEnd(15, ' ') + `${Oxygen[j].z.toFixed(9)}`.padEnd(15, ' ') + '\n';
-			Zn = `Zn`.padEnd(10,' ') + `${Zunk[j].x.toFixed(9)}`.padEnd(15, ' ') 
-			+ `${Zunk[j].y.toFixed(9)}`.padEnd(15, ' ') + `${Zunk[j].z.toFixed(9)}`.padEnd(15, ' ') + '\n';
+			O = `O`.padEnd(10,' ') + `${Oxygen[j].x.toFixed(9)}`.padEnd(25, ' ') 
+			+ `${Oxygen[j].y.toFixed(9)}`.padEnd(25, ' ') + `${Oxygen[j].z.toFixed(9)}`.padEnd(25, ' ') + '\n';
+			Zn = `Zn`.padEnd(10,' ') + `${Zunk[j].x.toFixed(9)}`.padEnd(25, ' ') 
+			+ `${Zunk[j].y.toFixed(9)}`.padEnd(25, ' ') + `${Zunk[j].z.toFixed(9)}`.padEnd(25, ' ') + '\n';
 			fs.appendFileSync(fileName, O);
 			fs.appendFileSync(fileName, Zn);
 		}		
@@ -248,12 +310,13 @@ function writeToAFile(name, cycle){
 function start(){
 	workFlow('Berhman');
 	workFlow('Nyberg');
-	workFlow('test');
 }
+
+start();
 
 // Test functions
 
-function countTime(){
+function countTime(Oxygen, Zunk){
 	let start,end;	
 	let O, Z;
 	let time = 0;
@@ -271,9 +334,3 @@ function countTime(){
 	time = (end - start)/100;
 	return time;
 } // counting time for cicle
-const startO = JSON.parse(JSON.stringify(Oxygen));
-function print(){
-	for(let i = 0; i < N; i++){
-		console.log(startO[i].x - Oxygen[i].x, i);
-	}
-} // test function
