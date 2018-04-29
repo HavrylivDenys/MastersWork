@@ -43,9 +43,9 @@ const O_coordinates = starting_data.Oxygen;
 const Zn_coordinates = starting_data.Zunk;
 const N = starting_data.Number;
 const t = 1e-15;
-const Lx = 15;
-const Ly = 20;
-const Lz = 20;
+const Lx = 10;
+const Ly = 10;
+const Lz = 16;
 
 class Atom{
 	constructor(x = 0, y = 0, z = 0){
@@ -190,8 +190,8 @@ function box(Oxygen, Zunk){
 			while(Oxygen[i].x > Lx){
 				Oxygen[i].x = Oxygen[i].x - Lx/2;
 			}			
-		}else if(Oxygen[i].x < -Lx){
-			while(Oxygen[i].x < -Lx){
+		}else if(Oxygen[i].x < 0){
+			while(Oxygen[i].x < 0){
 				Oxygen[i].x = Oxygen[i].x + Lx/2;
 			}
 		}
@@ -199,8 +199,8 @@ function box(Oxygen, Zunk){
 			while(Oxygen[i].y > Ly){
 				Oxygen[i].y = Oxygen[i].y - Ly/2;
 			}			
-		}else if(Oxygen[i].y < -Ly){
-			while(Oxygen[i].y < -Ly){
+		}else if(Oxygen[i].y < 0){
+			while(Oxygen[i].y < 0){
 				Oxygen[i].y = Oxygen[i].y + Ly/2;
 			}			
 		}
@@ -208,8 +208,8 @@ function box(Oxygen, Zunk){
 			while(Oxygen[i].z > Lz){
 				Oxygen[i].z = Oxygen[i].z - Lz/2;
 			}			
-		}else if(Oxygen[i].z < -Lz){
-			while(Oxygen[i].z < -Lz){
+		}else if(Oxygen[i].z < 0){
+			while(Oxygen[i].z < 0){
 				Oxygen[i].z = Oxygen[i].z + Lz/2;
 			}			
 		}
@@ -217,8 +217,8 @@ function box(Oxygen, Zunk){
 			while(Zunk[i].x > Lx){
 				Zunk[i].x = Zunk[i].x - Lx/2;
 			}			
-		}else if(Zunk[i].x < -Lx){
-			while(Zunk[i].x < -Lx){
+		}else if(Zunk[i].x < 0){
+			while(Zunk[i].x < 0){
 				Zunk[i].x = Zunk[i].x + Lx/2;
 			}			
 		}
@@ -226,8 +226,8 @@ function box(Oxygen, Zunk){
 			while(Zunk[i].y > Ly){
 				Zunk[i].y = Zunk[i].y - Ly/2;
 			}			
-		}else if(Zunk[i].y < -Ly){
-			while(Zunk[i].y < -Ly){
+		}else if(Zunk[i].y < 0){
+			while(Zunk[i].y < 0){
 				Zunk[i].y = Zunk[i].y + Ly/2;
 			}			
 		}
@@ -235,8 +235,8 @@ function box(Oxygen, Zunk){
 			while(Zunk[i].z > Lz){
 				Zunk[i].z = Zunk[i].z - Lz/2;
 			}			
-		}else if(Zunk[i].z < -Lz){
-			while(Zunk[i].z < -Lz){
+		}else if(Zunk[i].z < 0){
+			while(Zunk[i].z < 0){
 				Zunk[i].z = Zunk[i].z + Lz/2;
 			}			
 		}
@@ -292,7 +292,7 @@ function writeToAFile(name, cycle, Oxygen, Zunk){
 	try{
 		let O;
 		let Zn;				
-		fs.appendFileSync(fileName, `${N}\n`);
+		fs.appendFileSync(fileName, `${N * 2}\n`);
 		fs.appendFileSync(fileName, `${assemblyName}\n`);
 		for(let j = 0; j < N; j++){
 			O = `O`.padEnd(10,' ') + `${Oxygen[j].x.toFixed(9)}`.padEnd(25, ' ') 
