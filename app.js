@@ -1,7 +1,7 @@
 // Molecular dynamics version 1.0.1
 const fs = require('fs');
 const path = require('path');
-const starting_data = require('./starting_data.json');
+const starting_data = require('./startingData/starting_data.json');
 
 const constants = require('./constants').constants;
 

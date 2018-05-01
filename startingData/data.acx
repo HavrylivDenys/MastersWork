@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chemistryDoc>
+	<atom id="ID1" coord3DX="1.87596690916978" coord3DY="3.24927" coord3DZ="9.799761344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID2" coord3DX="4.68991727292444" coord3DY="1.624635" coord3DZ="9.799761344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID3" coord3DX="7.5038676366791" coord3DY="3.24927" coord3DZ="9.799761344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID4" coord3DX="1.87596690916978" coord3DY="6.49854" coord3DZ="9.799761344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID5" coord3DX="4.68991727292444" coord3DY="4.873905" coord3DZ="9.799761344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID6" coord3DX="4.68991727292444" coord3DY="4.873905" coord3DZ="13.0136" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID7" coord3DX="4.68991727292444" coord3DY="4.873905" coord3DZ="15.005201344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID8" coord3DX="6.56588418209421" coord3DY="4.873905" coord3DZ="10.41088" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID9" coord3DX="6.56588418209421" coord3DY="4.873905" coord3DZ="12.402481344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID10" coord3DX="7.5038676366791" coord3DY="3.24927" coord3DZ="13.0136" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID11" coord3DX="7.5038676366791" coord3DY="3.24927" coord3DZ="15.005201344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID12" coord3DX="1.87596690916978" coord3DY="6.49854" coord3DZ="13.0136" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID13" coord3DX="1.87596690916978" coord3DY="6.49854" coord3DZ="15.005201344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID14" coord3DX="3.75193381833955" coord3DY="6.49854" coord3DZ="10.41088" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID15" coord3DX="3.75193381833955" coord3DY="6.49854" coord3DZ="12.402481344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID16" coord3DX="4.68991727292444" coord3DY="1.624635" coord3DZ="13.0136" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID17" coord3DX="4.68991727292444" coord3DY="1.624635" coord3DZ="15.005201344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID18" coord3DX="6.56588418209421" coord3DY="1.624635" coord3DZ="10.41088" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID19" coord3DX="6.56588418209421" coord3DY="1.624635" coord3DZ="12.402481344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID20" coord3DX="0.937983454584888" coord3DY="4.873905" coord3DZ="10.41088" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID21" coord3DX="0.937983454584888" coord3DY="4.873905" coord3DZ="12.402481344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID22" coord3DX="1.87596690916978" coord3DY="3.24927" coord3DZ="13.0136" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID23" coord3DX="1.87596690916978" coord3DY="3.24927" coord3DZ="15.005201344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID24" coord3DX="3.75193381833955" coord3DY="3.24927" coord3DZ="10.41088" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID25" coord3DX="3.75193381833955" coord3DY="3.24927" coord3DZ="12.402481344" atomicNumber="8">
+		<formalCharge numerator="-2" denominator="1"/>
+	</atom>
+	<atom id="ID26" coord3DX="3.75193381833955" coord3DY="3.24927" coord3DZ="15.61632" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID27" coord3DX="6.56588418209421" coord3DY="1.624635" coord3DZ="15.61632" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID28" coord3DX="0.937983454584888" coord3DY="4.873905" coord3DZ="15.61632" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID29" coord3DX="3.75193381833955" coord3DY="6.49854" coord3DZ="15.61632" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<atom id="ID30" coord3DX="6.56588418209421" coord3DY="4.873905" coord3DZ="15.61632" atomicNumber="30">
+		<formalCharge numerator="2" denominator="1"/>
+	</atom>
+	<bond id="ID31" atoms="ID10 ID19" bondType="single"/>
+	<bond id="ID32" atoms="ID20 ID4" bondType="single"/>
+	<bond id="ID33" atoms="ID20 ID1" bondType="single"/>
+	<bond id="ID34" atoms="ID12 ID21" bondType="single"/>
+	<bond id="ID35" atoms="ID22 ID21" bondType="single"/>
+	<bond id="ID36" atoms="ID20 ID21" bondType="single"/>
+	<bond id="ID37" atoms="ID22 ID23" bondType="single"/>
+	<bond id="ID38" atoms="ID24 ID5" bondType="single"/>
+	<bond id="ID39" atoms="ID24 ID1" bondType="single"/>
+	<bond id="ID40" atoms="ID24 ID2" bondType="single"/>
+	<bond id="ID41" atoms="ID6 ID25" bondType="single"/>
+	<bond id="ID42" atoms="ID22 ID25" bondType="single"/>
+	<bond id="ID43" atoms="ID16 ID25" bondType="single"/>
+	<bond id="ID44" atoms="ID24 ID25" bondType="single"/>
+	<bond id="ID45" atoms="ID16 ID17" bondType="single"/>
+	<bond id="ID46" atoms="ID18 ID3" bondType="single"/>
+	<bond id="ID47" atoms="ID18 ID2" bondType="single"/>
+	<bond id="ID48" atoms="ID16 ID19" bondType="single"/>
+	<bond id="ID49" atoms="ID18 ID19" bondType="single"/>
+	<bond id="ID50" atoms="ID10 ID9" bondType="single"/>
+	<bond id="ID51" atoms="ID10 ID11" bondType="single"/>
+	<bond id="ID52" atoms="ID12 ID13" bondType="single"/>
+	<bond id="ID53" atoms="ID14 ID4" bondType="single"/>
+	<bond id="ID54" atoms="ID14 ID5" bondType="single"/>
+	<bond id="ID55" atoms="ID12 ID15" bondType="single"/>
+	<bond id="ID56" atoms="ID6 ID15" bondType="single"/>
+	<bond id="ID57" atoms="ID14 ID15" bondType="single"/>
+	<bond id="ID58" atoms="ID6 ID7" bondType="single"/>
+	<bond id="ID59" atoms="ID8 ID5" bondType="single"/>
+	<bond id="ID60" atoms="ID8 ID3" bondType="single"/>
+	<bond id="ID61" atoms="ID6 ID9" bondType="single"/>
+	<bond id="ID62" atoms="ID8 ID9" bondType="single"/>
+	<bond id="ID63" atoms="ID30 ID11" bondType="single"/>
+	<bond id="ID64" atoms="ID29 ID13" bondType="single"/>
+	<bond id="ID65" atoms="ID29 ID7" bondType="single"/>
+	<bond id="ID66" atoms="ID30 ID7" bondType="single"/>
+	<bond id="ID67" atoms="ID27 ID11" bondType="single"/>
+	<bond id="ID68" atoms="ID28 ID13" bondType="single"/>
+	<bond id="ID69" atoms="ID28 ID23" bondType="single"/>
+	<bond id="ID70" atoms="ID26 ID7" bondType="single"/>
+	<bond id="ID71" atoms="ID26 ID23" bondType="single"/>
+	<bond id="ID72" atoms="ID26 ID17" bondType="single"/>
+	<bond id="ID73" atoms="ID27 ID17" bondType="single"/>
+</chemistryDoc>
